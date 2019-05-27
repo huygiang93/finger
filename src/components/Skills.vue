@@ -1,10 +1,14 @@
 <template>
   <div class="container">
     <div class="holder">
-
+      
       <form @submit.prevent="addSkill">
-        <input type="text" placeholder="Enter a skill you have.."  v-model="skill">
+        <input type="text" placeholder="Enter a skill you have.."  v-model="skill" v-validate="'min:5'" name="skill">
+        <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
+        
       </form>
+
+      
 
       <ul>
         <li v-for="(data, index) in skills" :key='index'>{{data.skill}}</li>
@@ -40,11 +44,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-  /* .alert{
-      background-color: rgb(230, 218, 115);
-      width:100%;
-      height:30px;
-      } */
 
   .holder {
       background: #fff;
@@ -82,6 +81,14 @@ export default {
     font-size: 1.3em;
     background-color: #323333;
     color: #687F7F;
+  }
+
+  .alert {
+    background: #fdf2ce;
+    font-weight: bold;
+    display: inline-block;
+    padding: 5px;
+    margin-top: -20px;
   }
 
 </style>
