@@ -3,25 +3,38 @@
     <nav>
         <router-link to="/">Home</router-link>
         <router-link to="/about">About</router-link>
+      <h1 @click="onClick">
+        {{message}}
+      </h1>
       </nav>
+
     <router-view/>
 <!--     <Skills/> -->
+    
+
   </div>
 </template>
 
 <script>
-/* import Skills from './components/Skills.vue'
- */
-export default {
-  name: 'app',
-  components: {
-    /* Skills */
+/* import Skills from './components/Skills.vue' */
+import Vue from 'vue';
+import Component from 'vue-class-component';
+
+
+export default Component({})(
+  class App extends Vue{
+    message = 'Click here to reveal author of this page';
+
+    onClick(){
+      this.message = "Huy Giang";
+    }
   }
-}
+)
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
 
 body {
   background-color: #EEEEEE;
@@ -32,6 +45,11 @@ body {
   padding-top: 50px;
   }
 
+h1{
+  padding: 10px;
+  border-radius:3px;
+
+}
 nav {
   padding: 20px 20px 20px 0;
 }
@@ -61,7 +79,14 @@ body, html {
   width:50%
 }
 
-body{
-  background-color:#eeeeee;
-}
+
+/* h1{
+  padding:0px;
+  text-decoration: navajowhite;
+  background: rgb(112, 233, 101);
+  color: rgb(219, 18, 18);
+  
+} */
+
+
 </style>

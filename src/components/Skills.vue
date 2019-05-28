@@ -1,10 +1,11 @@
 <template>
   <div class="container">
+    
     <div class="holder">
       
       <form @submit.prevent="addSkill">
 
-        <input type="text" placeholder="Enter a skill you have.."  v-model="skill" v-validate="'min:5'" name="skill">
+        <input type="text" placeholder="Add a skill you have here..."  v-model="skill" v-validate="'min:3'" name="skill">
         
         <transition name="alert-in" enter-active-class="animateflipInX" leave-active-class="animated flipOutX">
           <p class="alert" v-if="errors.has('skill')">{{ errors.first('skill') }}</p>
@@ -21,7 +22,14 @@
 
       <p>These are the skills that you possess.</p>
 
+      
     </div>
+        <!--crazy button-->
+      <a class="button is-info is-crazy"
+      :style="buttonOffsets"
+      @mouseenter="moveButton">
+        click me for $5
+      </a>
   </div>
 </template>
 
@@ -34,7 +42,11 @@ export default {
       skills: [
         {"skill": "Vue.js"},
         {"skill": "Frontend Developer"}
-      ]
+      ],
+      buttonOffsets:{
+        top:null,
+        left:null
+      }
     }
   },
   methods : {
@@ -44,7 +56,13 @@ export default {
     },
     remove(id){
       this.skills.splice(id,1);
-    }
+    },
+    moveButton(){
+      this.buttonOffsets={
+        top:`${Math.random()*window.innerHeight}px`,
+        left:`${Math.random()*window.innerWidth}px`,
+      }
+    },
   }
 }
 </script>
@@ -54,6 +72,17 @@ export default {
 @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"; 
 
+
+  .is-info{
+    padding: 10px;
+    background-color: #3273dc;
+    border-color:transparent;
+    color:#fff;
+  }
+  .is-crazy{
+    position:absolute;
+    transition:0.3s ease all;
+  }
 
   .holder {
       background: #fff;
@@ -118,6 +147,7 @@ export default {
     100%{
       transform: scale(1);
     }
+  
   }
 
 </style>
